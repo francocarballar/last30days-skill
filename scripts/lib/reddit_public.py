@@ -11,6 +11,7 @@ Handles 429 rate limits with exponential backoff, HTML anti-bot responses,
 network timeouts, and missing subreddits.
 """
 
+import gzip
 import json
 import sys
 import time
@@ -21,7 +22,7 @@ from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeou
 from typing import Any, Dict, List, Optional
 
 
-USER_AGENT = "last30days/3.0 (research tool)"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
 # Depth-aware limits for thread counts
 DEPTH_LIMITS = {
@@ -59,7 +60,10 @@ def _fetch_json(url: str, timeout: int = 15) -> Optional[Dict[str, Any]]:
     """
     headers = {
         "User-Agent": USER_AGENT,
-        "Accept": "application/json",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
     }
     req = urllib.request.Request(url, headers=headers)
 
@@ -71,8 +75,10 @@ def _fetch_json(url: str, timeout: int = 15) -> Optional[Dict[str, Any]]:
                     _log(f"Anti-bot HTML response (Content-Type: {content_type})")
                     return None
 
-                body = resp.read().decode("utf-8")
-                return json.loads(body)
+                body = resp.read()
+                if resp.headers.get("Content-Encoding") == "gzip":
+                    body = gzip.decompress(body)
+                return json.loads(body.decode("utf-8"))
 
         except urllib.error.HTTPError as e:
             if e.code == 429:
