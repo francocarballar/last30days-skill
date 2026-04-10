@@ -43,7 +43,7 @@ v3 surfaces all API errors with clear diagnostics instead of silently returning 
 ### @zl190
 [PR #115](https://github.com/mvanhorn/last30days-skill/pull/115) - HN trending merge
 v3 merges trending and keyword HN results with deduplication for better coverage.
-> _Add your bio, website, or anything you'd like here._
+> Healthcare AI engineer. [Blog](https://zl190.github.io/blog)
 
 ### @hnshah
 [PR #84](https://github.com/mvanhorn/last30days-skill/pull/84), [#85](https://github.com/mvanhorn/last30days-skill/pull/85), [#86](https://github.com/mvanhorn/last30days-skill/pull/86) - Watchlist delivery, 90-day scanning window, HN/Polymarket storage
