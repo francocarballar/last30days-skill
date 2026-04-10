@@ -55,5 +55,6 @@ v3 has durable watchlist with multi-source storage and extended time windows.
 ## Past Contributors
 
 - [@JosephOIbrahim](https://github.com/JosephOIbrahim) - Windows Unicode fix ([#17](https://github.com/mvanhorn/last30days-skill/pull/17))
-- [@levineam](https://github.com/levineam) - Model fallback for unverified orgs ([#16](https://github.com/mvanhorn/last30days-skill/pull/16))
+- [@levineam](https://github.com/levineam) - User-Agent fix ([#16](https://github.com/mvanhorn/last30days-skill/pull/16))
 - [@jonthebeef](https://github.com/jonthebeef) - Early testing and feedback
+- [@francocarballar](https://github.com/francocarballar) - Fixed HTTP 403 on Reddit public search by replacing urllib's generic User-Agent with browser-like headers ([#199](https://github.com/mvanhorn/last30days-skill/pull/199)) — [francocarballar.com](https://www.francocarballar.com)
